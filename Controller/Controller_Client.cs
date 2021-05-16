@@ -1,4 +1,5 @@
-﻿using FlightSim.Model;
+﻿using System;
+using FlightSim.Model;
 
 namespace FlightSim
 {
@@ -14,9 +15,34 @@ namespace FlightSim
         }
         
         //Functions
-        public Client GenerateClient()
+        public void GenerateClient()
         {
-            return _contrSim.CallToGenerateClient();
+            Random r = new Random();
+            string type;
+            
+            //Deciding what type of Client will be generated
+            int random = r.Next(5);
+
+            switch (random)
+            {
+                case 0:
+                    type = "f";
+                    break;
+                case 1:
+                    type = "r";
+                    break;
+                case 2:
+                    type = "o";
+                    break;
+                case 3:
+                    type = "c";
+                    break;
+                default:
+                    type = "p";
+                    break; 
+            }
+            
+            _contrSim.CallToGenerateClient(type);
         }
     }
 }

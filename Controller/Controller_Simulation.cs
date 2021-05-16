@@ -25,9 +25,9 @@ namespace FlightSim
             
         }
 
-        public Client CallToGenerateClient()
+        public void CallToGenerateClient(string type)
         {
-            return _modelScenario.GenerateClient();
+            _modelScenario.GenerateClient(type);
         }
     }
 }

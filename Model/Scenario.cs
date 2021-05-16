@@ -9,13 +9,7 @@ namespace FlightSim.Model
         private List<Airport> _airports;
         private List<Aircraft> _aircrafts;
         private List<Client> _clients;
-        
-        //Properties
-        public Client_Factory ClientFactory
-        {
-            get { return _clientFactory; }
-        }
-        
+
         //Constructor
         public Scenario(List<Airport> airports, List<Aircraft> aircrafts)
         {
@@ -26,9 +20,9 @@ namespace FlightSim.Model
         }
         
         //Functions
-        public Client GenerateClient()
+        public void GenerateClient(string type)
         {
-            return _clientFactory.CreateClient();
+            _clients.Add(_clientFactory.CreateClient(type));
         }
     }
 }
