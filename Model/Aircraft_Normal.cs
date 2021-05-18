@@ -9,12 +9,11 @@ namespace FlightSim.Model
         private int _unLoadingTime;
         
         //Constructor
-        public Aircraft_Normal()
+        public Aircraft_Normal(int speed, int loadingTime, int unLoadingTime)
         {
-            Random r = new Random();
-            
-            _speed = r.Next(880, 925);
-            _loadingTime = 
+            _speed = speed;
+            _loadingTime = loadingTime;
+            _unLoadingTime = unLoadingTime;
         }
     }
 }

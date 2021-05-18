@@ -9,11 +9,9 @@ namespace FlightSim.Model
         private double _capacity; //In tons
 
         //Constructor
-        public Aircraft_Cargo()
+        public Aircraft_Cargo(double capacity, int speed, int loadingTime, int UnloadingTime) : base (speed, loadingTime, UnloadingTime)
         {
-            Random r = new Random();
-
-            _capacity = r.NextDouble() * 27.5 + 12.5; //Generates between 12.5 and 40
+            _capacity = capacity;
             _trailColor = Color.Blue;
         }
     }

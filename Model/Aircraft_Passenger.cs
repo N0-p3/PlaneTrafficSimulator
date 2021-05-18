@@ -9,11 +9,9 @@ namespace FlightSim.Model
         private int _capacity;
 
         //Constructor
-        public Aircraft_Passenger()
+        public Aircraft_Passenger(int capacity, int speed, int loadingTime, int unLoadingTime) : base (speed, loadingTime, unLoadingTime)
         {
-            Random r = new Random();
-
-            _capacity = r.Next(80, 140);
+            _capacity = capacity;
             _trailColor = Color.Green;
         }
     }
