@@ -37,15 +37,15 @@ namespace FlightSim.Model
                 slice = coordinate - midPoint / (max / 15);
 
             int exactSlice = Convert.ToInt32(Math.Floor(slice));
-            double decimalOfParallel = slice - Math.Truncate(slice);
+            double decimalOfSlice = slice - Math.Truncate(slice);
 
             //Calculating the minutes and seconds
-            int minutes = Convert.ToInt32(Math.Floor(decimalOfParallel * 60));
-            double seconds = (decimalOfParallel * 60 - Math.Truncate(decimalOfParallel * 60)) * 60;
+            int minutes = Convert.ToInt32(Math.Floor(decimalOfSlice * 60));
+            double seconds = (decimalOfSlice * 60 - Math.Truncate(decimalOfSlice * 60)) * 60;
 
             seconds = Math.Truncate(seconds * 100) / 100;
             
-            string coordinates = exactSlice + "°" + minutes + "'" + seconds + "\"" + ((coordinate < midPoint) ? direction1  : direction2 );
+            string coordinates = exactSlice + "°" + minutes + "'" + seconds + "\"" + (coordinate < midPoint ? direction1  : direction2 );
 
             return coordinates;
         }
