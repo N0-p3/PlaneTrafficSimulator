@@ -32,9 +32,11 @@ namespace FlightSim.Model
             double slice;
             
             if (coordinate < midPoint)
-                slice = max - coordinate / (max / 15);
+                slice = (((midPoint * 2 - 2 * coordinate + coordinate) - midPoint) * max) / midPoint;
+            else if (coordinate > midPoint)
+                slice = ((coordinate - midPoint) * max) / midPoint;
             else
-                slice = coordinate - midPoint / (max / 15);
+                slice = 0.0;
 
             int exactSlice = Convert.ToInt32(Math.Floor(slice));
             double decimalOfSlice = slice - Math.Truncate(slice);
