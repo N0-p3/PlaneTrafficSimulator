@@ -1,23 +1,26 @@
-﻿namespace FlightSim.Model
+﻿using FlightSim.Model.Aircrafts;
+using FlightSim.Model.Clients;
+
+namespace FlightSim.Model.States
 {
-    public class State_Unloading : State
+    public class State_ComeBackFlight : State_InFlight
     {
         //Data member
-        private int _unloadingTime;
+        private Position _destination;
         
         //Constructor
-        public State_Unloading(Aircraft_Normal ac, Client client) : base(ac)
+        public State_ComeBackFlight(Aircraft ac, Client_Special client) : base(ac, client)
         {
-            _unloadingTime = ac.UnLoadingTime;
+            _destination = client.Position;
         }
-
+        
         //Functions
         public override void DoStateAction(int seconds)
         {
             //TODO : Implement
             throw new System.NotImplementedException();
         }
-
+        
         private void BeginMaintenanceState()
         {
             State_Maintenance maintenanceState = new State_Maintenance(_aircraft);

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace FlightSim.Model
+namespace FlightSim.Model.Aircrafts
 {
     public class Aircraft_Passenger : Aircraft_Normal
     {

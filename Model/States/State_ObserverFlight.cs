@@ -1,4 +1,7 @@
-﻿namespace FlightSim.Model
+﻿using FlightSim.Model.Aircrafts;
+using FlightSim.Model.Clients;
+
+namespace FlightSim.Model.States
 {
     public class State_ObserverFlight : State_InFlight
     {

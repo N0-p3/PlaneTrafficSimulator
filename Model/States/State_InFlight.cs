@@ -1,4 +1,7 @@
-﻿namespace FlightSim.Model
+﻿using FlightSim.Model.Aircrafts;
+using FlightSim.Model.Clients;
+
+namespace FlightSim.Model.States
 {
     public abstract class State_InFlight : State
     {

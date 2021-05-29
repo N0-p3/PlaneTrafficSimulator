@@ -1,4 +1,6 @@
-﻿namespace FlightSim.Model
+﻿using FlightSim.Model.Aircrafts;
+
+namespace FlightSim.Model.States
 {
     public class State_Waiting : State
     {

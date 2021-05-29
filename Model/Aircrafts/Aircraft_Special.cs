@@ -1,4 +1,4 @@
-﻿namespace FlightSim.Model
+﻿namespace FlightSim.Model.Aircrafts
 {
     public abstract class Aircraft_Special : Aircraft
     {

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using FlightSim.Model.Aircrafts;
+using FlightSim.Model.Clients;
 using static FlightSim.Model.Client_Factory;
 
 namespace FlightSim.Model

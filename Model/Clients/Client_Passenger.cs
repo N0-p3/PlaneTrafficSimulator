@@ -1,4 +1,4 @@
-﻿namespace FlightSim.Model
+﻿namespace FlightSim.Model.Clients
 {
     public class Client_Passenger : Client_Normal
     {

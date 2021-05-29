@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
+using FlightSim.Model.States;
 
-namespace FlightSim.Model
+namespace FlightSim.Model.Aircrafts
 {
     public abstract class Aircraft
     {

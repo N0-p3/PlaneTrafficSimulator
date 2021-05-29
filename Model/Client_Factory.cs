@@ -1,4 +1,6 @@
-﻿namespace FlightSim.Model
+﻿using FlightSim.Model.Clients;
+
+namespace FlightSim.Model
 {
     public class Client_Factory
     {

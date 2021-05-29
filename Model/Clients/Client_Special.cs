@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlightSim.Model
+namespace FlightSim.Model.Clients
 {
     public abstract class Client_Special : Client
     {
