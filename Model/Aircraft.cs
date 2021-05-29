@@ -9,6 +9,19 @@ namespace FlightSim.Model
         protected int _speed; //In km/h
         private State _state;
         
+        //Properties
+        public State State {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (value is State)
+                    _state = value;
+            } 
+        }
+        
         //Constructor
         public Aircraft()
         {

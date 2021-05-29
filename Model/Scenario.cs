@@ -19,6 +19,21 @@ namespace FlightSim.Model
         }
         
         //Functions
+        public void LookForMatch()
+        {
+            //TODO : Implement observer/observable
+            
+            foreach (Airport airport in _airports)
+            {
+                airport.LookForMatch();
+            }
+        }
+
+        public void PassTime(int seconds)
+        {
+            //TODO : Implement
+        }
+        
         public void GenerateClient(string type)
         {
             _clients.Add(GetFactory().CreateClient(type));
