@@ -31,7 +31,7 @@ namespace FlightSim.Model
 
         private void BeginBoarding(Aircraft_Normal ac, Client_Normal client)
         {
-            State_Boarding stateBoarding = new State_Boarding(ac.LoadingTime, client);
+            State_Boarding stateBoarding = new State_Boarding(ac, client);
             ac.State = stateBoarding;
         }
     }

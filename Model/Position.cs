@@ -21,7 +21,7 @@ namespace FlightSim.Model
             _pixelCoords[1] = y;
         }
 
-        public override string ToString() //tamere
+        public override string ToString()
         {
             return CalculateCoordinate(753.0,_pixelCoords[0], 180, "O", "E") 
                    + " " + CalculateCoordinate(382.5, _pixelCoords[1], 90, "N", "S");

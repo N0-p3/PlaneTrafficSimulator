@@ -4,7 +4,7 @@
     {
         //Data member
         private Airport _destination;
-        
+
         //Properties;
         public Airport Destination
         {

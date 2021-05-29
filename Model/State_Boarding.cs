@@ -7,21 +7,23 @@
         private Client_Normal _client;
 
         //Constructor
-        public State_Boarding(int loadingTime, Client_Normal client)
+        public State_Boarding(Aircraft_Normal ac, Client_Normal client) : base(ac)
         {
-            _boardingTime = loadingTime;
+            _boardingTime = ac.LoadingTime;
             _client = client;
         }
         
         //Functions
-        public void BoardAircraft(int seconds)
+        public override void DoStateAction(int seconds) //Board the plane
         {
             //TODO : Implement
+            throw new System.NotImplementedException();
         }
 
         private void BeginFlightState()
         {
-            //TODO : Implement
+            State_OneWayFlight flightState = new State_OneWayFlight(_aircraft, _client);
+            _aircraft.State = flightState;
         }
     }
 }

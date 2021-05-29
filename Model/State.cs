@@ -3,6 +3,16 @@
     public abstract class State
     {
         //Data member
-        private Aircraft _aircraft;
+        protected Aircraft _aircraft;
+        
+        //Constructor
+        protected State(Aircraft ac)
+        {
+            _aircraft = ac;
+        }
+        
+        
+        //Function
+        public abstract void DoStateAction(int seconds);
     }
 }
