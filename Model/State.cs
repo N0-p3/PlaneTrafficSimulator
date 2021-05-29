@@ -2,6 +2,7 @@
 {
     public abstract class State
     {
-        
+        //Data member
+        private Aircraft _aircraft;
     }
 }

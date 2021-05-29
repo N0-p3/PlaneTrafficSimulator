@@ -9,7 +9,7 @@ namespace FlightSim.Model
         private Position _position;
         private List<Aircraft> _aircrafts;
         private List<Client> _clients;
-        
+
         //Constructor
         public Airport(string name, Position pos, List<Aircraft> aircrafts)
         {
@@ -29,9 +29,9 @@ namespace FlightSim.Model
             //TODO : Implement
         }
 
-        private void BeginBoarding(Aircraft ac, Client_Normal client)
+        private void BeginBoarding(Aircraft_Normal ac, Client_Normal client)
         {
-            State_Boarding stateBoarding = new State_Boarding();
+            State_Boarding stateBoarding = new State_Boarding(ac.LoadingTime, client);
             ac.State = stateBoarding;
         }
     }
