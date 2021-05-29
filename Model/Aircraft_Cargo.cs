@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace FlightSim.Model
 {
@@ -9,7 +8,7 @@ namespace FlightSim.Model
         private double _capacity; //In tons
 
         //Constructor
-        public Aircraft_Cargo(double capacity, int speed, int loadingTime, int UnloadingTime) : base (speed, loadingTime, UnloadingTime)
+        public Aircraft_Cargo(double capacity, int speed, int maintenanceTime, int loadingTime, int unloadingTime) : base (speed, maintenanceTime, loadingTime, unloadingTime)
         {
             _capacity = capacity;
             _trailColor = Color.Blue;

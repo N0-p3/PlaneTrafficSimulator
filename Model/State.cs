@@ -10,8 +10,7 @@
         {
             _aircraft = ac;
         }
-        
-        
+
         //Function
         public abstract void DoStateAction(int seconds);
     }

@@ -14,6 +14,7 @@
         //Functions
         public override void DoStateAction(int seconds)
         {
+            //TODO : Implement
             throw new System.NotImplementedException();
         }
 

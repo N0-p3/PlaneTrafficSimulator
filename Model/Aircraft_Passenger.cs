@@ -8,7 +8,7 @@ namespace FlightSim.Model
         private int _capacity;
 
         //Constructor
-        public Aircraft_Passenger(int capacity, int speed, int loadingTime, int unLoadingTime) : base (speed, loadingTime, unLoadingTime)
+        public Aircraft_Passenger(int capacity, int speed, int maintenanceTime, int loadingTime, int unloadingTime) : base (speed, maintenanceTime, loadingTime, unloadingTime)
         {
             _capacity = capacity;
             _trailColor = Color.Green;
