@@ -9,21 +9,23 @@ namespace FlightSim.Model.States
         private int _unloadingTime;
         
         //Constructor
-        public State_Unloading(Aircraft_Normal ac, Client client) : base(ac)
+        public State_Unloading(Aircraft_Normal ac, int seconds) : base(ac)
         {
             _unloadingTime = ac.UnLoadingTime;
+            DoStateAction(seconds);
         }
 
         //Functions
         public override void DoStateAction(int seconds)
         {
-            //TODO : Implement
-            throw new System.NotImplementedException();
+            _unloadingTime -= seconds;
+            if (_unloadingTime < 0)
+                BeginMaintenanceState(System.Math.Abs(_unloadingTime));
         }
 
-        private void BeginMaintenanceState()
+        private void BeginMaintenanceState(int seconds)
         {
-            _aircraft.State = new State_Maintenance(_aircraft);
+            _aircraft.State = new State_Maintenance(_aircraft, seconds);
         }
     }
 }

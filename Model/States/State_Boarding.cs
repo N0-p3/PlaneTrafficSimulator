@@ -23,11 +23,11 @@ namespace FlightSim.Model.States
         }
         
         //Functions
-        public override void DoStateAction(int seconds) //Board the plane
+        public override void DoStateAction(int seconds)
         {
             _boardingTime -= seconds;
-            if (_boardingTime <= 0)
-                BeginFlightState(seconds);
+            if (_boardingTime < 0)
+                BeginFlightState(System.Math.Abs(_boardingTime));
         }
 
         private void BeginFlightState(int seconds)
@@ -35,9 +35,9 @@ namespace FlightSim.Model.States
             State flightState;
             
             if (_aircraft.Type == 'P' || _aircraft.Type == 'C')
-                flightState = new State_OneWayFlight(_aircraft, (Client_Normal)_client);
+                flightState = new State_OneWayFlight(_aircraft, (Client_Normal)_client, seconds, _baseAirport.Position);
             else
-                flightState = new State_RecurantFlight(_aircraft, (Client_Fire)_client, _baseAirport);
+                flightState = new State_RecurantFlight(_aircraft, (Client_Fire)_client, _baseAirport, seconds, _baseAirport.Position);
             
             _aircraft.State = flightState;
         }

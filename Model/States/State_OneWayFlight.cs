@@ -1,4 +1,5 @@
-﻿using FlightSim.Model.Aircrafts;
+﻿using System;
+using FlightSim.Model.Aircrafts;
 using FlightSim.Model.Clients;
 
 namespace FlightSim.Model.States
@@ -7,23 +8,29 @@ namespace FlightSim.Model.States
     {
         //Data member
         private Airport _destination;
-        
+
         //Constructor
-        public State_OneWayFlight(Aircraft ac, Client_Normal client) : base(ac, client)
+        public State_OneWayFlight(Aircraft ac, Client_Normal client, int seconds, Position pos) : base(ac, client, pos)
         {
             _destination = client.Destination;
+            DoStateAction(seconds);
         }
         
         //Functions
         public override void DoStateAction(int seconds)
         {
-            //TODO : Implement
-            throw new System.NotImplementedException();
+            if (seconds > 0)
+                Travel(seconds, _destination.Position);
         }
 
-        private void BeginUnloadingState()
+        private void BeginUnloadingState(int seconds)
         {
-            _aircraft.State = new State_Unloading((Aircraft_Normal)_aircraft, _client);
+            _aircraft.State = new State_Unloading((Aircraft_Normal)_aircraft, seconds);
+        }
+
+        protected override void StartNextState(int seconds)
+        {
+            BeginUnloadingState(seconds);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FlightSim.Model.States
         private Position _destination;
         
         //Constructor
-        public State_ObserverFlight(Aircraft ac, Client_Special client) : base(ac, client)
+        public State_ObserverFlight(Aircraft ac, Client_Special client, Position pos) : base(ac, client, pos)
         {
             _destination = client.Position;
         }
@@ -25,6 +25,11 @@ namespace FlightSim.Model.States
         {
             State_Maintenance maintenanceState = new State_Maintenance(_aircraft);
             _aircraft.State = maintenanceState;
+        }
+
+        protected override void StartNextState(int seconds)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

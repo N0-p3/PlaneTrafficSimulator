@@ -5,20 +5,25 @@ namespace FlightSim.Model
     public class Position
     {
         //Data member
-        private int[] _pixelCoords;
+        private double[] _pixelCoords;
         
         //Properties
-        public int Pix_X
-        { get { return _pixelCoords[0]; } }
-        
-        public int Pix_Y
-        { get { return _pixelCoords[1]; } }
+        public double PixX
+        {
+            get => _pixelCoords[0];
+            set => _pixelCoords[0] = value;
+        }
+
+        public double PixY
+        {
+            get => _pixelCoords[1];
+            set => _pixelCoords[1] = value;
+        }
 
         //Constructor
         public Position(int x, int y)
         {
-            _pixelCoords[0] = x;
-            _pixelCoords[1] = y;
+            _pixelCoords = new double[] {x, y};
         }
 
         public override string ToString()

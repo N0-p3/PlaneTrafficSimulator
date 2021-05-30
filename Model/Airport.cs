@@ -17,8 +17,9 @@ namespace FlightSim.Model
         private List<Aircraft> _aircrafts;
         private List<Client_Normal> _clients;
         
-        //Property
+        //Properties
         public byte Traffic => _traffic;
+        public Position Position => _position;
 
         //Constructor
         public Airport(string name, Position pos, List<Aircraft> aircrafts)
@@ -100,7 +101,6 @@ namespace FlightSim.Model
         private void BeginBoarding(Aircraft ac, Client client)
         {
             ac.State = new State_Boarding(ac, client, this);
-            //Put the aircraft in the scenario
             RemoveAircraft(ac);
         }
         
@@ -109,12 +109,11 @@ namespace FlightSim.Model
             State flightState;
 
             if (ac.Type == 'R')
-                flightState = new State_ComeBackFlight(ac, (Client_Special) client);
+                flightState = new State_ComeBackFlight(ac, (Client_Special) client, Position);
             else
-                flightState = new State_ObserverFlight(ac, (Client_Special) client);
+                flightState = new State_ObserverFlight(ac, (Client_Special) client, Position);
             
             ac.State = flightState;
-            //Put the aircraft in the scenario
             RemoveAircraft(ac);
         }
 
