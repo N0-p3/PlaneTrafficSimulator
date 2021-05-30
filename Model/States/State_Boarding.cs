@@ -25,11 +25,12 @@ namespace FlightSim.Model.States
         //Functions
         public override void DoStateAction(int seconds) //Board the plane
         {
-            //TODO : Implement
-            throw new System.NotImplementedException();
+            _boardingTime -= seconds;
+            if (_boardingTime <= 0)
+                BeginFlightState(seconds);
         }
 
-        private void BeginFlightState()
+        private void BeginFlightState(int seconds)
         {
             State flightState;
             

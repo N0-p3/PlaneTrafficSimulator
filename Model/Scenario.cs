@@ -19,17 +19,21 @@ namespace FlightSim.Model
             _airports = airports;
             _aircrafts = aircrafts;
             _specialClients = new List<Client_Special>();
+
+            foreach (Airport airport in _airports)
+            {
+                airport.AssignRemoveAircraftDelegate(addAircraft);
+            }
         }
         
         //Functions
-        public void LookForMatch()
-        {
-            //TODO : Implement observer/observable
-        }
-
         public void PassTime(int seconds)
         {
             //TODO : Implement
+            foreach (Aircraft ac in _aircrafts)
+            {
+                ac.State.DoStateAction(seconds);
+            }
         }
         
         public void GenerateClient(char type)
@@ -49,6 +53,11 @@ namespace FlightSim.Model
 
                 _airports[clientSource].AddClient(GetFactory().CreateNormalClient(type, _airports[clientDest]));
             }
+        }
+
+        private void addAircraft(Aircraft ac)
+        {
+            _aircrafts.Add(ac);
         }
     }
 }

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FlightSim.Model.Aircrafts;
 using FlightSim.Model.Clients;
 using FlightSim.Model.States;
 
 namespace FlightSim.Model
 {
+    public delegate void RemoveAircraft(Aircraft ac);
+    
     public class Airport
     {
         //Data members
+        private RemoveAircraft _removeAircraft;
         private string _name;
         private byte _traffic;
         private Position _position;
@@ -77,6 +79,11 @@ namespace FlightSim.Model
             LookForMatch(ac.Type, null, ac);
         }
 
+        public void AssignRemoveAircraftDelegate(RemoveAircraft removeAircraft)
+        {
+            _removeAircraft = removeAircraft;
+        }
+
         public void ReceivePosition(Aircraft ac, Client client)
         {
             Match(ac, client);
@@ -93,6 +100,8 @@ namespace FlightSim.Model
         private void BeginBoarding(Aircraft ac, Client client)
         {
             ac.State = new State_Boarding(ac, client, this);
+            //Put the aircraft in the scenario
+            RemoveAircraft(ac);
         }
         
         private void BeginFlight(Aircraft ac, Client client)
@@ -105,6 +114,8 @@ namespace FlightSim.Model
                 flightState = new State_ObserverFlight(ac, (Client_Special) client);
             
             ac.State = flightState;
+            //Put the aircraft in the scenario
+            RemoveAircraft(ac);
         }
 
         private void RemoveClient(Client_Normal client)
@@ -115,6 +126,7 @@ namespace FlightSim.Model
         private void RemoveAircraft(Aircraft ac)
         {
             _aircrafts.Remove(ac);
+            _removeAircraft?.Invoke(ac);
         }
     }
 }
