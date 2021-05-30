@@ -9,9 +9,13 @@ namespace FlightSim.Model
     {
         //Data members
         private string _name;
+        private byte _traffic;
         private Position _position;
         private List<Aircraft> _aircrafts;
         private List<Client_Normal> _clients;
+        
+        //Property
+        public byte Traffic => _traffic;
 
         //Constructor
         public Airport(string name, Position pos, List<Aircraft> aircrafts)

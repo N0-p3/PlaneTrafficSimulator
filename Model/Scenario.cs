@@ -37,17 +37,14 @@ namespace FlightSim.Model
             //TODO : Implement
         }
         
-        public void GenerateClient(char type)
+        public void GenerateClient(char type, Airport airport)
         {
             Random r = new Random();
             
             if (type == 'F' || type == 'R' || type == 'O')
                 _specialClients.Add(GetFactory().CreateSpecialClient(type));
             else
-            {
-                int index = r.Next(_airports.Count - 1);
-                GetFactory().CreateNormalClient(type, _airports[index]);
-            }
+                airport.AddClient(GetFactory().CreateNormalClient(type, _airports[r.Next(_airports.Count - 1)]));
         }
     }
 }
