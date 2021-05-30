@@ -6,6 +6,9 @@ namespace FlightSim.Model.Aircrafts
     {
         //Data member
         private double _capacity; //In tons
+        
+        //Property
+        public override char Type => 'C';
 
         //Constructor
         public Aircraft_Cargo(double capacity, int speed, int maintenanceTime, int loadingTime, int unloadingTime) : base (speed, maintenanceTime, loadingTime, unloadingTime)

@@ -5,13 +5,17 @@ namespace FlightSim.Model.States
 {
     public class State_RecurantFlight : State_InFlight
     {
-        //Data member
+        //Data members
         private Position _destination;
+        private Airport _nearestWaterSource;
+        private Airport _baseAirport;
         
         //Constructor
-        public State_RecurantFlight(Aircraft ac, Client_Special client) : base(ac, client)
+        public State_RecurantFlight(Aircraft ac, Client_Fire client, Airport baseAirport) : base(ac, client)
         {
             _destination = client.Position;
+            _nearestWaterSource = FindNearestWaterSource(client.Position);
+            _baseAirport = baseAirport;
         }
 
         //Functions
@@ -23,8 +27,13 @@ namespace FlightSim.Model.States
         
         private void BeginMaintenanceState()
         {
-            State_Maintenance maintenanceState = new State_Maintenance(_aircraft);
-            _aircraft.State = maintenanceState;
+            _aircraft.State = new State_Maintenance(_aircraft);;
+        }
+
+        private Airport FindNearestWaterSource(Position clientPosition)
+        {
+            //TODO : Implement
+            throw new System.NotImplementedException();
         }
     }
 }

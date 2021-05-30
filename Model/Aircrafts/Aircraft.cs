@@ -12,19 +12,13 @@ namespace FlightSim.Model.Aircrafts
         private State _state;
         
         //Properties
-        public int Speed
-        {
-            get { return _speed; }
-        }
-        
-        public int MaintenanceTime
-        {
-            get { return _maintenanceTime; }
-        }
+        public int Speed => _speed;
+        public int MaintenanceTime => _maintenanceTime;
+        public abstract char Type { get; }
 
-        public State State {
-            get
-            { return _state; }
+        public State State
+        {
+            get => _state;
             set
             {
                 if (value is State)

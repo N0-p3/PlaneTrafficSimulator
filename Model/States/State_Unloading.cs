@@ -23,8 +23,7 @@ namespace FlightSim.Model.States
 
         private void BeginMaintenanceState()
         {
-            State_Maintenance maintenanceState = new State_Maintenance(_aircraft);
-            _aircraft.State = maintenanceState;
+            _aircraft.State = new State_Maintenance(_aircraft);
         }
     }
 }

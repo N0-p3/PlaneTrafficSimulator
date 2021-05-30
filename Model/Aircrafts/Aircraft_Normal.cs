@@ -7,15 +7,9 @@
         private int _unLoadingTime;
 
         //Properties
-        public int LoadingTime
-        {
-            get { return _loadingTime; }
-        }
-        
-        public int UnLoadingTime
-        {
-            get { return _unLoadingTime; }
-        }
+        public int LoadingTime => _loadingTime;
+
+        public int UnLoadingTime => _unLoadingTime;
 
         //Constructor
         public Aircraft_Normal(int speed, int maintenanceTime, int loadingTime, int unLoadingTime)

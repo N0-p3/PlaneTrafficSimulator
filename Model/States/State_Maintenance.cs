@@ -22,8 +22,7 @@ namespace FlightSim.Model.States
 
         private void BeginWaitingState()
         {
-            State_Waiting waitingState = new State_Waiting(_aircraft);
-            _aircraft.State = waitingState;
+            _aircraft.State = new State_Waiting(_aircraft);
         }
     }
 }

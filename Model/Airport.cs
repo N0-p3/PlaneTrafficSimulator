@@ -22,20 +22,48 @@ namespace FlightSim.Model
             _clients = new List<Client>();
         }
         
+        //Function
+        public bool HasSpecificAircraft(char type)
+        {
+            foreach (Aircraft aircraft in _aircrafts)
+                if (aircraft.Type == type)
+                    return true;
+            
+            return false;
+        }
+
+        public void ReceivePosition(Aircraft ac, Client client)
+        {
+            Match(ac, client);
+        }
+        
         public void LookForMatch()
         {
             //TODO : Implement
+            throw new System.NotImplementedException();
         }
 
         private void Match(Aircraft ac, Client client)
         {
             //TODO : Implement
+            throw new System.NotImplementedException();
         }
 
-        private void BeginBoarding(Aircraft_Normal ac, Client_Normal client)
+        private void BeginBoarding(Aircraft ac, Client client)
         {
-            State_Boarding stateBoarding = new State_Boarding(ac, client);
-            ac.State = stateBoarding;
+            ac.State = new State_Boarding(ac, client, this);
+        }
+        
+        private void BeginFlight(Aircraft ac, Client client)
+        {
+            State flightState;
+
+            if (ac.Type == 'R')
+                flightState = new State_ComeBackFlight(ac, (Client_Special) client);
+            else
+                flightState = new State_ObserverFlight(ac, (Client_Special) client);
+            
+            ac.State = flightState;
         }
     }
 }

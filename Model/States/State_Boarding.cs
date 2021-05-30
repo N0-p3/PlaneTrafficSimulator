@@ -7,13 +7,19 @@ namespace FlightSim.Model.States
     {
         //Data members
         private int _boardingTime;
-        private Client_Normal _client;
+        private Airport _baseAirport;
+        private Client _client;
 
         //Constructor
-        public State_Boarding(Aircraft_Normal ac, Client_Normal client) : base(ac)
+        public State_Boarding(Aircraft ac, Client client, Airport baseAirport) : base(ac)
         {
-            _boardingTime = ac.LoadingTime;
+            if (ac.Type == 'P' || ac.Type == 'C')
+                _boardingTime = ((Aircraft_Normal) ac).LoadingTime;
+            else
+                _boardingTime = ((Aircraft_TankPlane) ac).LoadingTime;
+            
             _client = client;
+            _baseAirport = baseAirport;
         }
         
         //Functions
@@ -25,7 +31,13 @@ namespace FlightSim.Model.States
 
         private void BeginFlightState()
         {
-            State_OneWayFlight flightState = new State_OneWayFlight(_aircraft, _client);
+            State flightState;
+            
+            if (_aircraft.Type == 'P' || _aircraft.Type == 'C')
+                flightState = new State_OneWayFlight(_aircraft, (Client_Normal)_client);
+            else
+                flightState = new State_RecurantFlight(_aircraft, (Client_Fire)_client, _baseAirport);
+            
             _aircraft.State = flightState;
         }
     }

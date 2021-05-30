@@ -23,8 +23,7 @@ namespace FlightSim.Model.States
 
         private void BeginUnloadingState()
         {
-            State_Unloading unloadingState = new State_Unloading((Aircraft_Normal)_aircraft, _client);
-            _aircraft.State = unloadingState;
+            _aircraft.State = new State_Unloading((Aircraft_Normal)_aircraft, _client);
         }
     }
 }
