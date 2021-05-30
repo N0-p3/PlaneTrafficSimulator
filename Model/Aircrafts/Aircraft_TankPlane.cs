@@ -11,7 +11,7 @@ namespace FlightSim.Model.Aircrafts
         //Properties
         public int LoadingTime => _loadingTime;
         public int UnLoadingTime => _unLoadingTime;
-        public override char Type => 'T';
+        public override char Type => 'F';
         
         //Constructor
         public Aircraft_TankPlane(int speed, int maintenanceTime, int loadingTime, int unLoadingTime)

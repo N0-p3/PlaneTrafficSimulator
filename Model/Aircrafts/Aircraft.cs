@@ -3,7 +3,7 @@ using FlightSim.Model.States;
 
 namespace FlightSim.Model.Aircrafts
 {
-    public abstract class Aircraft
+    public abstract class Aircraft : ISpecific
     {
         //Data member
         protected Color _trailColor;

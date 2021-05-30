@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FlightSim.Model.Aircrafts;
 using FlightSim.Model.Clients;
 using FlightSim.Model.States;
@@ -27,21 +28,26 @@ namespace FlightSim.Model
         }
         
         //Function
-        public bool HasSpecificAircraft(char type)
+        public bool HasSpecific<T>(char type, List<T> list, out T found)
+            where T : class, ISpecific
         {
-            foreach (Aircraft aircraft in _aircrafts)
-                if (aircraft.Type == type)
+            foreach (T item in list)
+                if (item.Type == type)
+                {
+                    found = item;
                     return true;
-            
+                }
+
+            found = null; 
             return false;
         }
 
-        public void LookForMatch()
+        public void LookForMatch(char type, Client client, Aircraft ac)
         {
-            if (HasSpecificAircraft())
-            {
-                
-            }
+            if (client != null && HasSpecific(type, _aircrafts, out Aircraft aircraftFound))
+                Match(aircraftFound, client);
+            else if (ac != null && HasSpecific(type, _clients, out Client_Normal clientFound))
+                Match(ac, clientFound);
         }
 
         public void AddClient(Client_Normal client)
@@ -62,12 +68,13 @@ namespace FlightSim.Model
             }
             else
                 _clients.Add(client);
-            LookForMatch();
+            LookForMatch(client.Type, client, null);
         }
         
         public void AddAircraft(Aircraft ac)
         {
             _aircrafts.Add(ac);
+            LookForMatch(ac.Type, null, ac);
         }
 
         public void ReceivePosition(Aircraft ac, Client client)

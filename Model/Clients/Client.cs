@@ -1,6 +1,6 @@
 ﻿namespace FlightSim.Model.Clients
 {
-    public abstract class Client
+    public abstract class Client : ISpecific
     {
         //Property
         public abstract char Type { get; }

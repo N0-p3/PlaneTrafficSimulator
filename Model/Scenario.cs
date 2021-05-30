@@ -25,11 +25,6 @@ namespace FlightSim.Model
         public void LookForMatch()
         {
             //TODO : Implement observer/observable
-            
-            foreach (Airport airport in _airports)
-            {
-                airport.LookForMatch();
-            }
         }
 
         public void PassTime(int seconds)
@@ -37,14 +32,23 @@ namespace FlightSim.Model
             //TODO : Implement
         }
         
-        public void GenerateClient(char type, Airport airport)
+        public void GenerateClient(char type)
         {
             Random r = new Random();
             
             if (type == 'F' || type == 'R' || type == 'O')
                 _specialClients.Add(GetFactory().CreateSpecialClient(type));
             else
-                airport.AddClient(GetFactory().CreateNormalClient(type, _airports[r.Next(_airports.Count - 1)]));
+            {
+                int clientSource;
+                int clientDest = r.Next(_airports.Count - 1);
+
+                do
+                    clientSource = r.Next(_airports.Count - 1);
+                while (clientSource == clientDest);
+
+                _airports[clientSource].AddClient(GetFactory().CreateNormalClient(type, _airports[clientDest]));
+            }
         }
     }
 }

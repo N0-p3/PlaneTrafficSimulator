@@ -18,7 +18,7 @@ namespace FlightSim
         public void GenerateClient()
         {
             Random r = new Random();
-            string type;
+            char type;
             
             //Deciding what type of Client will be generated
             int random = r.Next(5);
@@ -26,19 +26,19 @@ namespace FlightSim
             switch (random)
             {
                 case 0:
-                    type = "f";
+                    type = 'F';
                     break;
                 case 1:
-                    type = "r";
+                    type = 'R';
                     break;
                 case 2:
-                    type = "o";
+                    type = 'O';
                     break;
                 case 3:
-                    type = "c";
+                    type = 'C';
                     break;
                 default:
-                    type = "p";
+                    type = 'P';
                     break; 
             }
             
