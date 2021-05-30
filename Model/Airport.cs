@@ -38,13 +38,31 @@ namespace FlightSim.Model
 
         public void LookForMatch()
         {
-            //TODO : Implement
-            throw new System.NotImplementedException();
+            if (HasSpecificAircraft())
+            {
+                
+            }
         }
 
         public void AddClient(Client_Normal client)
         {
-            _clients.Add(client);
+            Client_Normal clientToMerge = null;
+
+            foreach (Client_Normal clientLoop in _clients)
+                if (clientLoop.Destination == client.Destination)
+                    clientToMerge = clientLoop;
+
+
+            if (clientToMerge != null && clientToMerge.Type == client.Type)
+            {
+                if (client.Type == 'P')
+                    _clients.Add(Client.MergePassengerClient((Client_Passenger)clientToMerge, (Client_Passenger)client));
+                else
+                    _clients.Add(Client.MergeCargoClient((Client_Cargo)clientToMerge, (Client_Cargo)client));
+            }
+            else
+                _clients.Add(client);
+            LookForMatch();
         }
         
         public void AddAircraft(Aircraft ac)
@@ -59,8 +77,10 @@ namespace FlightSim.Model
 
         private void Match(Aircraft ac, Client client)
         {
-            //TODO : Implement
-            throw new System.NotImplementedException();
+            if (ac.Type == 'P' || ac.Type == 'C' || ac.Type == 'T')
+                BeginBoarding(ac, client);
+            else
+                BeginFlight(ac, client);
         }
 
         private void BeginBoarding(Aircraft ac, Client client)

@@ -5,11 +5,8 @@
         //Data member
         private Airport _destination;
 
-        //Properties;
-        public Airport Destination
-        {
-            get { return _destination; }
-        }
+        //Properties
+        public Airport Destination => _destination;
         
         //Constructor
         public Client_Normal(Airport destination)

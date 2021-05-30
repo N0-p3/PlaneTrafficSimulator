@@ -9,6 +9,7 @@ namespace FlightSim.Model.Clients
         
         //Property
         public byte Spread => _spread;
+        public override char Type => 'F';
 
         //Constructor
         public Client_Fire(byte spread)

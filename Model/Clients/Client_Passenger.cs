@@ -6,11 +6,14 @@
         private int _amountOfPassengers;
         
         //Properties
-        public double AmountOfPassengers
+        public override char Type => 'P';
+
+        public int AmountOfPassengers
         {
-            get { return _amountOfPassengers; }
+            get => _amountOfPassengers;
+            set => _amountOfPassengers = value;
         }
-        
+
         //Constructor
         public Client_Passenger(int amountOfPassengers, Airport destination) : base(destination)
         {
