@@ -1,4 +1,5 @@
-﻿using FlightSim.Model.Clients;
+﻿using System;
+using FlightSim.Model.Clients;
 
 namespace FlightSim.Model
 {
@@ -21,24 +22,32 @@ namespace FlightSim.Model
             return _factory;
         }
         
-        public Client CreateClient(string type)
+        public Client_Normal CreateNormalClient(char type, Airport airport)
         {
+            Random r = new Random();
             switch (type)
             {
-                case "f":
-                    return new Client_Fire();
-                
-                case "r":
-                    return new Client_Rescue();
-                
-                case "o":
-                    return new Client_Observer();
-                
-                case "c":
-                    return new Client_Cargo();
+                case 'C':
+                    return new Client_Cargo(r.Next(41), airport);
                 
                 default:
-                    return new Client_Passenger();
+                    return new Client_Passenger(r.Next(81), airport);
+            }
+        }
+
+        public Client_Special CreateSpecialClient(char type)
+        {
+            Random r = new Random();
+            switch (type)
+            {
+                case 'F':
+                    return new Client_Fire((byte) r.Next(6));
+                
+                case 'R':
+                    return new Client_Rescue();
+                
+                default:
+                    return new Client_Observer();
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FlightSim.Model.Aircrafts;
 using FlightSim.Model.Clients;
 using static FlightSim.Model.Client_Factory;
@@ -10,14 +11,14 @@ namespace FlightSim.Model
         //Data members
         private List<Airport> _airports;
         private List<Aircraft> _aircrafts;
-        private List<Client> _clients;
+        private List<Client_Special> _specialClients;
 
         //Constructor
         public Scenario(List<Airport> airports, List<Aircraft> aircrafts)
         {
             _airports = airports;
             _aircrafts = aircrafts;
-            _clients = new List<Client>();
+            _specialClients = new List<Client_Special>();
         }
         
         //Functions
@@ -36,9 +37,17 @@ namespace FlightSim.Model
             //TODO : Implement
         }
         
-        public void GenerateClient(string type)
+        public void GenerateClient(char type)
         {
-            _clients.Add(GetFactory().CreateClient(type));
+            Random r = new Random();
+            
+            if (type == 'F' || type == 'R' || type == 'O')
+                _specialClients.Add(GetFactory().CreateSpecialClient(type));
+            else
+            {
+                int index = r.Next(_airports.Count - 1);
+                GetFactory().CreateNormalClient(type, _airports[index]);
+            }
         }
     }
 }

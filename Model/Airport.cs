@@ -11,7 +11,7 @@ namespace FlightSim.Model
         private string _name;
         private Position _position;
         private List<Aircraft> _aircrafts;
-        private List<Client> _clients;
+        private List<Client_Normal> _clients;
 
         //Constructor
         public Airport(string name, Position pos, List<Aircraft> aircrafts)
@@ -19,7 +19,7 @@ namespace FlightSim.Model
             _name = name;
             _position = pos;
             _aircrafts = aircrafts;
-            _clients = new List<Client>();
+            _clients = new List<Client_Normal>();
         }
         
         //Function
@@ -32,15 +32,25 @@ namespace FlightSim.Model
             return false;
         }
 
-        public void ReceivePosition(Aircraft ac, Client client)
-        {
-            Match(ac, client);
-        }
-        
         public void LookForMatch()
         {
             //TODO : Implement
             throw new System.NotImplementedException();
+        }
+
+        public void AddClient(Client_Normal client)
+        {
+            _clients.Add(client);
+        }
+        
+        public void AddAircraft(Aircraft ac)
+        {
+            _aircrafts.Add(ac);
+        }
+
+        public void ReceivePosition(Aircraft ac, Client client)
+        {
+            Match(ac, client);
         }
 
         private void Match(Aircraft ac, Client client)
@@ -64,6 +74,16 @@ namespace FlightSim.Model
                 flightState = new State_ObserverFlight(ac, (Client_Special) client);
             
             ac.State = flightState;
+        }
+
+        private void RemoveClient(Client_Normal client)
+        {
+            _clients.Remove(client);
+        }
+
+        private void RemoveAircraft(Aircraft ac)
+        {
+            _aircrafts.Remove(ac);
         }
     }
 }
