@@ -8,7 +8,7 @@ namespace FlightSim.Model.Aircrafts
     {
         //Data member
         protected Color _trailColor;
-        protected int _speed;         //In km/h
+        protected int _speed;                //In km/h
         protected int _maintenanceTime;
         protected Queue<State> _statesQueue;
         

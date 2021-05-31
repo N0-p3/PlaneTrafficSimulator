@@ -10,7 +10,8 @@ namespace FlightSim.Model
     public class Airport
     {
         //Data members
-        private RemoveAircraft _removeAircraft;
+        private RemoveAircraft _removeAircraftAction;
+        private Land _landAction;
         private string _name;
         private byte _traffic;
         private Position _position;
@@ -82,7 +83,12 @@ namespace FlightSim.Model
 
         public void AssignRemoveAircraftDelegate(RemoveAircraft removeAircraft)
         {
-            _removeAircraft = removeAircraft;
+            _removeAircraftAction = removeAircraft;
+        }
+
+        public void AssignLandDelegate(Land land)
+        {
+            _landAction = land;
         }
 
         public void ReceivePosition(Aircraft ac, Client client)
@@ -105,7 +111,7 @@ namespace FlightSim.Model
                 case 'P':
                 case 'C':
                     ac.State.Enqueue(new State_Boarding(ac));
-                    ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Normal)client).Destination, _position));
+                    ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Normal)client).Destination, _position, _landAction));
                     ac.State.Enqueue(new State_Unloading((Aircraft_Normal)ac));
                     ac.State.Enqueue(new State_Maintenance(ac));
                     ac.State.Enqueue(new State_Waiting(ac));
@@ -113,12 +119,14 @@ namespace FlightSim.Model
                 case 'F':
                     ac.State.Enqueue(new State_Boarding(ac));
                     int spread = ((Client_Fire) client).Spread;
-                    while (spread > 0)
+                    while (spread > 1)
                     {
                         ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Special) client).Position, _position));
                         ac.State.Enqueue(new State_OneWayFlight(ac, _position, ((Client_Special) client).Position));
                         spread--;
                     }
+                    ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Special) client).Position, _position));
+                    ac.State.Enqueue(new State_OneWayFlight(ac, _position, ((Client_Special) client).Position, _landAction));
                     ac.State.Enqueue(new State_Maintenance(ac));
                     ac.State.Enqueue(new State_Waiting(ac));
                     break;
@@ -157,7 +165,7 @@ namespace FlightSim.Model
         private void RemoveAircraft(Aircraft ac)
         {
             _aircrafts.Remove(ac);
-            _removeAircraft?.Invoke(ac);
+            _removeAircraftAction?.Invoke(ac);
         }
     }
 }

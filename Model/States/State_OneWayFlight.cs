@@ -3,18 +3,22 @@ using FlightSim.Model.Aircrafts;
 
 namespace FlightSim.Model.States
 {
+    public delegate void Land(Aircraft ac, Position pos);
+    
     public class State_OneWayFlight : State
     {
         //Data members
+        private Land _land;
         private Position _destination;
         private Position _pos;
         private double _distanceCounterX;
 
         //Constructor
-        public State_OneWayFlight(Aircraft ac, Position destination, Position pos) : base(ac)
+        public State_OneWayFlight(Aircraft ac, Position destination, Position pos, Land land = null) : base(ac)
         {
             _destination = destination;
             _pos = pos;
+            _land = land;
         }
         
         //Functions
@@ -46,7 +50,10 @@ namespace FlightSim.Model.States
             //Checks if we arrived at destination
             if (_distanceCounterX >= totalDistanceX)
             {
+                _pos.PixX = destination.PixX;
+                _pos.PixY = destination.PixY;
                 _aircraft.State.Dequeue();
+                _land?.Invoke(_aircraft, _pos);
             }
         }
     }

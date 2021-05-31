@@ -23,6 +23,7 @@ namespace FlightSim.Model
             foreach (Airport airport in _airports)
             {
                 airport.AssignRemoveAircraftDelegate(addAircraft);
+                airport.AssignLandDelegate(RemoveAircraft);
             }
         }
         
@@ -83,6 +84,12 @@ namespace FlightSim.Model
         private void addAircraft(Aircraft ac)
         {
             _aircrafts.Add(ac);
+        }
+
+        private void RemoveAircraft(Aircraft ac, Position pos)
+        {
+            _aircrafts.Remove(ac);
+            _airports.Find(airport => airport.Position == pos).AddAircraft(ac);
         }
     }
 }
