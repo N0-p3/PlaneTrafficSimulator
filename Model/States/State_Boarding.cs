@@ -1,5 +1,4 @@
 ﻿using FlightSim.Model.Aircrafts;
-using FlightSim.Model.Clients;
 
 namespace FlightSim.Model.States
 {
