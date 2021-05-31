@@ -1,4 +1,6 @@
-﻿using FlightSim.Model;
+﻿using System;
+using System.Threading;
+using FlightSim.Model;
 
 namespace FlightSim
 {
@@ -11,16 +13,26 @@ namespace FlightSim
         //Constructor
         public Controller_Simulation()
         {
-            
+            _contrClient = new Controller_Client();
+            _modelScenario = XmlReader();
         }
         
         //Functions
         private void Gameloop()
         {
-            
+            while (true)
+            {
+                long startTime = DateTime.Now.Ticks;
+                
+                //Operations
+
+                long endTime = DateTime.Now.Ticks;
+                long loopTime = endTime - startTime;
+                Thread.Sleep(1000 - (int)loopTime);
+            }
         }
 
-        private void XmlReader()
+        private Scenario XmlReader()
         {
             
         }

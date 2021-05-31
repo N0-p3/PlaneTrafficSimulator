@@ -62,7 +62,6 @@ namespace FlightSim.Model
         
         protected Airport FindNearestAirport(char type, Position pos)
         {
-            //TODO : Implement 
             Airport closestAirport = _airports[0];
             double closest = pos.Distance(closestAirport.Position);
             
