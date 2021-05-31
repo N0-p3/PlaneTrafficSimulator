@@ -29,7 +29,7 @@ namespace FlightSim.Model.Clients
         /*
          * Notifies the nearest Airport that can help the Client to send an Aircraft 
          */
-        protected void SendPosition()
+        private void SendPosition()
         {
             _nearestAirport.ReceivePosition(this);
         }

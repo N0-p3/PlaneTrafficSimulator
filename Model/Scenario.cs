@@ -78,7 +78,7 @@ namespace FlightSim.Model
          * type : The type of Aircraft received
          * pos  : The position of the Client
          */
-        protected Airport FindNearestAirport(char type, Position pos)
+        private Airport FindNearestAirport(char type, Position pos)
         {
             Airport closestAirport = _airports[0];
             double closest = pos.Distance(closestAirport.Position);

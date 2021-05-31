@@ -7,14 +7,12 @@ namespace FlightSim
     public class Controller_Simulation
     {
         //Data member
-        private Controller_Client _contrClient;
         private Scenario _modelScenario;
         
         //Constructor
         public Controller_Simulation()
         {
-            _contrClient = new Controller_Client();
-            _modelScenario = XmlReader();
+            _modelScenario = LoadXml();
         }
         
         //Functions
@@ -32,12 +30,12 @@ namespace FlightSim
             }
         }
 
-        private Scenario XmlReader()
+        private Scenario LoadXml()
         {
             
         }
 
-        public void CallToGenerateClient(char type)
+        private void CallToGenerateClient(char type)
         {
             _modelScenario.GenerateClient(type);
         }

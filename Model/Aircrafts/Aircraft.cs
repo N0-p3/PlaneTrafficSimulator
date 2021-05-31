@@ -10,7 +10,7 @@ namespace FlightSim.Model.Aircrafts
         protected Color _trailColor;         //The Aircraft's trail Color
         protected int _speed;                //The Aircraft's speed in km/h
         protected int _maintenanceTime;      //The Aircraft's maintenance time in seconds
-        protected Queue<State> _statesQueue; //The Aircraft's States in a Queue
+        private Queue<State> _statesQueue; //The Aircraft's States in a Queue
         
         //Properties
         /*
