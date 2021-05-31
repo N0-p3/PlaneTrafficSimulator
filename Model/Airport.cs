@@ -100,20 +100,52 @@ namespace FlightSim.Model
 
         private void BeginBoarding(Aircraft ac, Client client)
         {
-            ac.State = new State_Boarding(ac, client, this);
+            switch (ac.Type)
+            {
+                case 'P':
+                case 'C':
+                    ac.State.Enqueue(new State_Boarding(ac));
+                    ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Normal)client).Destination, _position));
+                    ac.State.Enqueue(new State_Unloading((Aircraft_Normal)ac));
+                    ac.State.Enqueue(new State_Maintenance(ac));
+                    ac.State.Enqueue(new State_Waiting(ac));
+                    break;
+                case 'F':
+                    ac.State.Enqueue(new State_Boarding(ac));
+                    int spread = ((Client_Fire) client).Spread;
+                    while (spread > 0)
+                    {
+                        ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Special) client).Position, _position));
+                        ac.State.Enqueue(new State_OneWayFlight(ac, _position, ((Client_Special) client).Position));
+                        spread--;
+                    }
+                    ac.State.Enqueue(new State_Maintenance(ac));
+                    ac.State.Enqueue(new State_Waiting(ac));
+                    break;
+            }
+            
+            ac.State.Dequeue();
             RemoveAircraft(ac);
         }
         
         private void BeginFlight(Aircraft ac, Client client)
         {
-            State flightState;
-
-            if (ac.Type == 'R')
-                flightState = new State_ComeBackFlight(ac, (Client_Special) client, Position);
-            else
-                flightState = new State_ObserverFlight(ac, (Client_Special) client, Position);
+            switch (ac.Type)
+            {
+                case 'O':
+                    ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Special) client).Position, _position));
+                    ac.State.Enqueue(new State_Maintenance(ac));
+                    ac.State.Enqueue(new State_OneWayFlight(ac, _position, ((Client_Special) client).Position));
+                    ac.State.Enqueue(new State_Maintenance(ac));
+                    ac.State.Enqueue(new State_Waiting(ac));
+                    break;
+                case 'R':
+                    ac.State.Enqueue(new State_OneWayFlight(ac, ((Client_Special) client).Position, _position));
+                    ac.State.Enqueue(new State_OneWayFlight(ac, _position, ((Client_Special) client).Position));
+                    break;
+            }
             
-            ac.State = flightState;
+            ac.State.Dequeue();
             RemoveAircraft(ac);
         }
 

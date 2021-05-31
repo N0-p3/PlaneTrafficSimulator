@@ -15,7 +15,7 @@
         }
 
         //Constructor
-        public Client_Passenger(int amountOfPassengers, Airport destination) : base(destination)
+        public Client_Passenger(int amountOfPassengers, Airport destination) : base(destination.Position)
         {
             _amountOfPassengers = amountOfPassengers;
         }

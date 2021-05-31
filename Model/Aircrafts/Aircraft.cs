@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using FlightSim.Model.States;
 
 namespace FlightSim.Model.Aircrafts
@@ -9,27 +10,20 @@ namespace FlightSim.Model.Aircrafts
         protected Color _trailColor;
         protected int _speed;         //In km/h
         protected int _maintenanceTime;
-        private State _state;
+        protected Queue<State> _statesQueue;
         
         //Properties
         public int Speed => _speed;
         public int MaintenanceTime => _maintenanceTime;
         public abstract char Type { get; }
 
-        public State State
-        {
-            get => _state;
-            set
-            {
-                if (value is State)
-                    _state = value;
-            } 
-        }
+        public Queue<State> State => _statesQueue;
 
         //Constructor
         public Aircraft()
         {
-            _state = new State_Waiting(this);
+            _statesQueue = new Queue<State>();
+            _statesQueue.Enqueue(new State_Waiting(this));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using FlightSim.Model.States;
 
 namespace FlightSim.Model.Aircrafts
 {

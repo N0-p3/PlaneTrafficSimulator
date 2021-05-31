@@ -1,5 +1,4 @@
 ﻿using FlightSim.Model.Aircrafts;
-using FlightSim.Model.Clients;
 
 namespace FlightSim.Model.States
 {
@@ -9,10 +8,9 @@ namespace FlightSim.Model.States
         private int _unloadingTime;
         
         //Constructor
-        public State_Unloading(Aircraft_Normal ac, int seconds) : base(ac)
+        public State_Unloading(Aircraft_Normal ac) : base(ac)
         {
             _unloadingTime = ac.UnLoadingTime;
-            DoStateAction(seconds);
         }
 
         //Functions
@@ -20,12 +18,7 @@ namespace FlightSim.Model.States
         {
             _unloadingTime -= seconds;
             if (_unloadingTime < 0)
-                BeginMaintenanceState(System.Math.Abs(_unloadingTime));
-        }
-
-        private void BeginMaintenanceState(int seconds)
-        {
-            _aircraft.State = new State_Maintenance(_aircraft, seconds);
+                _aircraft.State.Dequeue();
         }
     }
 }

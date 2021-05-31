@@ -8,10 +8,9 @@ namespace FlightSim.Model.States
         private int _maintenanceTime;
         
         //Constructor
-        public State_Maintenance(Aircraft ac, int seconds) : base(ac)
+        public State_Maintenance(Aircraft ac) : base(ac)
         {
             _maintenanceTime = ac.MaintenanceTime;
-            DoStateAction(seconds);
         }
 
         //Functions
@@ -19,12 +18,7 @@ namespace FlightSim.Model.States
         {
             _maintenanceTime -= seconds;
             if (_maintenanceTime < 0)
-                BeginWaitingState();
-        }
-
-        private void BeginWaitingState()
-        {
-            _aircraft.State = new State_Waiting(_aircraft);
+                _aircraft.State.Dequeue();
         }
     }
 }

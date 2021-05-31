@@ -3,13 +3,13 @@
     public abstract class Client_Normal : Client
     {
         //Data member
-        private Airport _destination;
+        private Position _destination;
 
         //Properties
-        public Airport Destination => _destination;
+        public Position Destination => _destination;
         
         //Constructor
-        public Client_Normal(Airport destination)
+        public Client_Normal(Position destination)
         {
             _destination = destination;
         }

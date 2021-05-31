@@ -32,7 +32,7 @@ namespace FlightSim.Model
             //TODO : Implement
             foreach (Aircraft ac in _aircrafts)
             {
-                ac.State.DoStateAction(seconds);
+                ac.State.Peek().DoStateAction(seconds);
             }
         }
         

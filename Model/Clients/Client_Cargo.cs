@@ -16,7 +16,7 @@
         
         
         //Constructor
-        public Client_Cargo(double tonsOfCargo, Airport destination) : base(destination)
+        public Client_Cargo(double tonsOfCargo, Airport destination) : base(destination.Position)
         {
             _tonsOfCargo = tonsOfCargo;
         }
