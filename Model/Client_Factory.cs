@@ -35,19 +35,19 @@ namespace FlightSim.Model
             }
         }
 
-        public Client_Special CreateSpecialClient(char type)
+        public Client_Special CreateSpecialClient(char type, Position pos, Airport nearestAirport)
         {
             Random r = new Random();
             switch (type)
             {
                 case 'F':
-                    return new Client_Fire((byte) r.Next(6));
+                    return new Client_Fire((byte) r.Next(6), pos, nearestAirport);
                 
                 case 'R':
-                    return new Client_Rescue();
+                    return new Client_Rescue(pos, nearestAirport);
                 
                 default:
-                    return new Client_Observer();
+                    return new Client_Observer(pos, nearestAirport);
             }
         }
     }

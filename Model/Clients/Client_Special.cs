@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using FlightSim.Model.Aircrafts;
+﻿using FlightSim.Model.Aircrafts;
 
 namespace FlightSim.Model.Clients
 {
@@ -13,21 +11,12 @@ namespace FlightSim.Model.Clients
         public Position Position => _pos;
         
         //Constructor
-        protected Client_Special()
+        protected Client_Special(Position pos)
         {
-            Random r = new Random();
-            _pos = new Position(r.Next(1507), r.Next(766));
+            _pos = pos;
         }
         
         //Function
-        protected Airport FindNearestAirport(char type)
-        {
-            //TODO : Implement 
-            //Note : Don't forget to save the aircraft that you'll find in order to give
-            //       it to SendPosition.
-            throw new NotImplementedException();
-        }
-
         protected void SendPosition(Aircraft ac)
         {
             _nearestAirport.ReceivePosition(ac, this);

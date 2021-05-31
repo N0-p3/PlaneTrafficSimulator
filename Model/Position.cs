@@ -32,6 +32,14 @@ namespace FlightSim.Model
                    + " " + CalculateCoordinate(382.5, _pixelCoords[1], 90, "N", "S");
         }
 
+        public double Distance(Position dest)
+        {
+            double distX = dest.PixX - PixX;
+            double distY = dest.PixY - PixY;
+
+            return Math.Sqrt(Math.Pow(distX, 2.0) + Math.Pow(distY, 2.0));
+        }
+
         private string CalculateCoordinate(double midPoint, double coordinate, double max, string direction1, string direction2)
         {
             double slice;

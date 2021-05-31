@@ -8,9 +8,9 @@ namespace FlightSim.Model.Clients
         public override char Type => 'O';
         
         //Constructor
-        public Client_Observer()
+        public Client_Observer(Position pos, Airport nearestAirport) : base(pos)
         {
-            _nearestAirport = FindNearestAirport('O');
+            _nearestAirport = nearestAirport;
         }
     }
 }

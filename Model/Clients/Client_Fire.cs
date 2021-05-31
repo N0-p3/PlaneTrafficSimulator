@@ -10,10 +10,10 @@
         public override char Type => 'F';
 
         //Constructor
-        public Client_Fire(byte spread)
+        public Client_Fire(byte spread, Position pos, Airport nearestAirport) : base(pos)
         {
             _spread = spread;
-            _nearestAirport = FindNearestAirport('T');
+            _nearestAirport = nearestAirport;
         }
     }
 }

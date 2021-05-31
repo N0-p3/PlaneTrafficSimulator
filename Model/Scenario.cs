@@ -39,9 +39,13 @@ namespace FlightSim.Model
         public void GenerateClient(char type)
         {
             Random r = new Random();
-            
+
             if (type == 'F' || type == 'R' || type == 'O')
-                _specialClients.Add(GetFactory().CreateSpecialClient(type));
+            {
+                Position pos = new Position(r.Next(1507), r.Next(766));
+                Airport airport = FindNearestAirport(type, pos);
+                _specialClients.Add(GetFactory().CreateSpecialClient(type, pos, airport));
+            }
             else
             {
                 int clientSource;
@@ -53,6 +57,27 @@ namespace FlightSim.Model
 
                 _airports[clientSource].AddClient(GetFactory().CreateNormalClient(type, _airports[clientDest]));
             }
+        }
+        
+        protected Airport FindNearestAirport(char type, Position pos)
+        {
+            //TODO : Implement 
+            Airport closestAirport = _airports[0];
+            double closest = pos.Distance(closestAirport.Position);
+            
+            foreach (Airport airport in _airports)
+            {
+                if (closest > airport.Position.Distance(pos))
+                {
+                    if (airport.HasSpecific(type, _aircrafts, out Aircraft found))
+                    {
+                        closestAirport = airport;
+                        closest = airport.Position.Distance(pos);
+                    }
+                }
+            }
+
+            return closestAirport;
         }
 
         private void addAircraft(Aircraft ac)
