@@ -5,15 +5,23 @@ namespace FlightSim.Model
     public class Position
     {
         //Data member
-        private double[] _pixelCoords;
+        private double[] _pixelCoords; //An array of double containing the x,y coordinates
         
         //Properties
+        /*
+         * Sends the X coordinate in pixel (as a double)
+         * Sets the X coordinate (as a double)
+         */
         public double PixX
         {
             get => _pixelCoords[0];
             set => _pixelCoords[0] = value;
         }
 
+        /*
+         * Sends the Y coordinate in pixel (as a double)
+         * Sets the Y coordinate (as a double)
+         */
         public double PixY
         {
             get => _pixelCoords[1];
@@ -21,17 +29,30 @@ namespace FlightSim.Model
         }
 
         //Constructor
+        /*
+         * Creates the Position object with the two x and y coordinate received
+         * x : the x coordinate
+         * y : the y coordinate
+         */
         public Position(int x, int y)
         {
             _pixelCoords = new double[] {x, y};
         }
 
+        //Functions
+        /*
+         * Sends the coordinates in a geographical format (in a string).
+         */
         public override string ToString()
         {
             return CalculateCoordinate(753.0,_pixelCoords[0], 180, "O", "E") 
                    + " " + CalculateCoordinate(382.5, _pixelCoords[1], 90, "N", "S");
         }
 
+        /*
+         * Calculates the distance between the caller's Position and the Position given.
+         * dest : the destination
+         */
         public double Distance(Position dest)
         {
             double distX = dest.PixX - PixX;
@@ -40,6 +61,15 @@ namespace FlightSim.Model
             return Math.Sqrt(Math.Pow(distX, 2.0) + Math.Pow(distY, 2.0));
         }
 
+        /*
+         * Calculates one set of coordinates along an axis with the help of a midpoint, the coordinate, the maximum and
+         * both directions that the axis is on.
+         * midPoint   : The middle point of the axis
+         * coordinate : The coordinate (which will be somewhere along the axis)
+         * max        : The maximum of degrees allowed on the axis
+         * direction1 : The direction at the beginning of the axis
+         * direction2 : The direction at the end of axis 
+         */
         private string CalculateCoordinate(double midPoint, double coordinate, double max, string direction1, string direction2)
         {
             double slice;

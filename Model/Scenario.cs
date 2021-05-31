@@ -9,11 +9,16 @@ namespace FlightSim.Model
     public class Scenario
     {
         //Data members
-        private List<Airport> _airports;
-        private List<Aircraft> _aircrafts;
-        private List<Client_Special> _specialClients;
+        private List<Airport> _airports;              //Every Airport in the scenario
+        private List<Aircraft> _aircrafts;            //Every Aircraft in the scenario
+        private List<Client_Special> _specialClients; //Every Special Clients in the scenario
 
         //Constructor
+        /*
+         * Creates the Scenario with a list of airports and aircrafts and assigns the delegate to every Airport
+         * airports  : Every Airport in the scenario
+         * aircrafts : Every Aircraft in the scenario
+         */
         public Scenario(List<Airport> airports, List<Aircraft> aircrafts)
         {
             _airports = airports;
@@ -28,6 +33,10 @@ namespace FlightSim.Model
         }
         
         //Functions
+        /*
+         * Makes time go by by a certain amount of seconds.
+         * seconds : The amount of time passing by (in seconds)
+         */
         public void PassTime(int seconds)
         {
             //TODO : Implement
@@ -37,6 +46,10 @@ namespace FlightSim.Model
             }
         }
         
+        /*
+         * Generates a client based on the type received.
+         * type : The type of client received
+         */
         public void GenerateClient(char type)
         {
             Random r = new Random();
@@ -60,6 +73,11 @@ namespace FlightSim.Model
             }
         }
         
+        /*
+         * Finds the nearest Airport that has a specfic Aircraft based on the type received.
+         * type : The type of Aircraft received
+         * pos  : The position of the Client
+         */
         protected Airport FindNearestAirport(char type, Position pos)
         {
             Airport closestAirport = _airports[0];
@@ -80,11 +98,20 @@ namespace FlightSim.Model
             return closestAirport;
         }
 
+        /*
+         * Adds an Aircraft to the list of Aircrafts in the Scenario.
+         * ac : The Aircraft being added
+         */
         private void addAircraft(Aircraft ac)
         {
             _aircrafts.Add(ac);
         }
 
+        /*
+         * Removes an Aircraft off of the list of Aircrafts in the Scenario.
+         * ac  : The Aircraft being removed
+         * pos : The position of the Airport the Aircraft is on
+         */
         private void RemoveAircraft(Aircraft ac, Position pos)
         {
             _aircrafts.Remove(ac);

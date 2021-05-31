@@ -6,22 +6,25 @@ namespace FlightSim.Model
     public class Client_Factory
     {
         //data member
-        private static Client_Factory _factory = null;
-        
-        //Constructor
-        private Client_Factory() {}
-        
+        private static Client_Factory _factory; //Itself, the Client Factory
+
         //Functions
+        /*
+         * Sets the factory if not already done and returns the factory
+         */
         public static Client_Factory GetFactory()
         {
-            if (_factory is null)
-            {
+            if (_factory == null)
                 _factory = new Client_Factory();
-            }
 
             return _factory;
         }
         
+        /*
+         * Creates a Normal Client according to the type received and the airport received (which is it's destination).
+         * type    : The type of the client
+         * airport : The destination of the client 
+         */
         public Client_Normal CreateNormalClient(char type, Airport airport)
         {
             Random r = new Random();
@@ -35,6 +38,12 @@ namespace FlightSim.Model
             }
         }
 
+        /*
+         * Creates a Special Client according to the type received, the position and the airport received (which is it's
+         * nearest Airport).
+         * type    : The type of the client
+         * airport : The nearest Airport containing an Aircraft that can help the client
+         */
         public Client_Special CreateSpecialClient(char type, Position pos, Airport nearestAirport)
         {
             Random r = new Random();
