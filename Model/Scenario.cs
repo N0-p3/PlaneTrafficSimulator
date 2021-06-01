@@ -39,7 +39,6 @@ namespace FlightSim.Model
          */
         public void PassTime(int seconds)
         {
-            //TODO : Implement
             foreach (Aircraft ac in _aircrafts)
             {
                 ac.State.Peek().DoStateAction(seconds);
